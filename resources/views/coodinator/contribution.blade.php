@@ -1,5 +1,16 @@
-@extends('admin.site.layout')
-@section('1')
+@extends('layout.main')
+@section('2')
+    <div class="wrapper row2">
+        <div class="rounded">
+            <nav id="mainav" class="clear">
+                <ul class="clear">
+                    <li><a class="active" href="{{ route('student.submit') }}">Contribution</a></li>
+                    <li><a class="active" href="#">Profile</a></li>
+                    <li class="active"><a href="{{ route('student.home') }}">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
     <h2>Contributions</h2>
     <ul>
         @foreach ($contributions as $contribution)
@@ -16,8 +27,12 @@
                 @endif
                 <!-- Hiển thị tệp tin Word nếu có -->
                 @if ($contribution->word_file_path)
-                    <a href="{{ asset('storage/' . $contribution->word_file_path) }}" download>Download Word File</a><br>
+                    <a href="{{ asset('storage/' . $contribution->word_file_path) }}" download>Download Word
+                        File</a><br>
                 @endif
             </li>
         @endforeach
     </ul>
+    </section>
+    </div>
+@endsection

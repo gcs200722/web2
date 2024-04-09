@@ -1,6 +1,5 @@
 @extends('admin.site.layout')
 @section('1')
-
     <div class="card bg-light">
         <div class="card-header bg-primary text-white">
             <h2 class="mb-0">Edit User: {{ $user->name }}</h2>
@@ -48,3 +47,4 @@
             </form>
         </div>
     </div>
+@endsection

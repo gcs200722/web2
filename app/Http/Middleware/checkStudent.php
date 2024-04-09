@@ -13,12 +13,13 @@ class checkStudent
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role, $faculty)
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'Student' && Auth::user()->faculty === $faculty) {
+        if (Auth::check() && Auth::user()->role == 'Student') {
             return $next($request);
         }
+        Auth::logout();
 
-        return redirect()->route('logout')->with('error', 'Bạn không có quyền truy cập.');
+        return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập.');
     }
 }

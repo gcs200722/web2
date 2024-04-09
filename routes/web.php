@@ -20,25 +20,26 @@ Route::group(['prefix' => '/admin'], function () {
     ]);
     Route::get('/contributions', [AdminController::class, 'showcontribution'])->name('contributions.show');
 
-})->middleware(checkAdmin::class);
-Route::group(['prefix' => '/student'], function () {
+})->middleware('admin');
+Route::group(['prefix' => '/student', 'middleware' => 'student'], function () {
     Route::get('/', [StudentController::class, 'home'])->name('student.home');
     Route::get('/contributions', [StudentController::class, 'formsubmit'])->name('student.submit');
     Route::post('/contribution', [StudentController::class, 'store'])->name('contributions.store');
 
-})->middleware(checkStudent::class);
+})->middleware('student');
 Route::group(['prefix' => '/manager'], function () {
     Route::get('/', [ManagerController::class, 'home'])->name('manager.home');
-})->middleware(checkManager::class);
+})->middleware('manager');
 Route::group(['prefix' => '/coodinator'], function () {
+    Route::get('/contribution', [CoodinatorController::class, 'showcontribution'])->name('contribution');
     Route::get('/', [CoodinatorController::class, 'home'])->name('coodinator.home');
-    Route::group(['prefix' => 'contribution/it'], function () {
-        Route::get('view', [ContributionController::class, 'itindex'])->name('contribution.it');
-    })->middleware(ITcheck::class);
-    Route::group(['prefix' => 'contribution/graphic'], function () {
-        Route::get('view', [ContributionController::class, 'graphicindex'])->name('contribution.graphic');
-    })->middleware(graphicCheck::class);
-    Route::group(['prefix' => 'contribution/business'], function () {
-        Route::get('view', [ContributionController::class, 'businessindex'])->name('contribution.business');
-    })->middleware(businessCheck::class);
-})->middleware(checkCoodinator::class);
+    /*  Route::group(['prefix' => 'contribution/it'], function () {
+         Route::get('view', [ContributionController::class, 'itindex'])->name('contribution.it');
+     })->middleware(ITcheck::class);
+     Route::group(['prefix' => 'contribution/graphic'], function () {
+         Route::get('view', [ContributionController::class, 'graphicindex'])->name('contribution.graphic');
+     })->middleware(graphicCheck::class);
+     Route::group(['prefix' => 'contribution/business'], function () {
+         Route::get('view', [ContributionController::class, 'businessindex'])->name('contribution.business');
+     })->middleware(businessCheck::class);*/
+})->middleware('coodiinator');

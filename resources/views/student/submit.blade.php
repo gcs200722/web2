@@ -1,5 +1,5 @@
 @extends('layout.main')
-<!DOCTYPE html>
+
 @section('2')
     <div class="row justify-content-center">
         @if (session()->has('success'))

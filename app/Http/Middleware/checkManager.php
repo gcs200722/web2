@@ -16,10 +16,11 @@ class checkManager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'University Marketing Manager') {
+        if (Auth::check() && Auth::user()->role == 'University Marketing Manager') {
             return $next($request);
         }
+        Auth::logout();
 
-        return redirect()->route('logout')->with('error', 'Bạn không có quyền truy cập.');
+        return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập.');
     }
 }

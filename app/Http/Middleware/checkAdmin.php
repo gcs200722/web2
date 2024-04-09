@@ -15,10 +15,11 @@ class checkAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'Administrator') {
+        if (Auth::check() && Auth::user()->role == 'Administrator') {
             return $next($request);
         }
+        Auth::logout();
 
-        return redirect()->route('logout')->with('error', 'Bạn không có quyền truy cập.');
+        return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập.');
     }
 }
